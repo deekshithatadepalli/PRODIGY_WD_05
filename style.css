@@ -1,0 +1,318 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+#bgVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  filter: brightness(0.4); /* Reduce video brightness more for better contrast */
+}
+
+body {
+  background: none; /* Remove the background color */
+  height: 100vh; /* Set the body height to 100vh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+.card {
+  width: 90%;
+  max-width: 470px;
+  background: rgba(255, 255, 255, 0.1); /* More transparent background */
+  color: #fff;
+  border-radius: 20px;
+  padding: 40px 35px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Deeper box shadow */
+  transition: all 0.4s ease; /* Smooth transition */
+  backdrop-filter: blur(10px); /* Add blur effect to background */
+}
+
+.card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4); /* Increase box shadow on hover */
+  transform: translateY(-10px); /* Move the card up on hover */
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search input {
+  border: 0;
+  outline: 0;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  color: #1e3a8a; /* Dark blue text */
+  padding: 15px 25px;
+  height: 50px;
+  border-radius: 30px;
+  flex: 1;
+  margin-right: 16px;
+  font-size: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.search input:focus {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Increase box shadow on focus */
+}
+
+.search button {
+  border: 0;
+  outline: 0;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Warm gradient background */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.search button:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f); /* Reverse gradient direction on hover */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Increase box shadow on hover */
+}
+
+.search button img {
+  width: 20px;
+}
+
+.weathericon {
+  width: 150px;
+  margin-top: 20px;
+  animation: pulse 2s infinite; /* Add pulse animation */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.weather h1 {
+  font-size: 70px;
+  font-weight: 600;
+  margin-top: 20px;
+  animation: fadeIn 1s forwards; /* Add fadeIn animation */
+  color: #ffeb3b; /* Bright yellow color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.weather h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-top: 10px;
+  animation: fadeIn 1s forwards; /* Add fadeIn animation */
+  color: #03a9f4; /* Light blue color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 30px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  transition: transform 0.5s; /* Add transition effect for hover */
+}
+
+.col img {
+  width: 40px;
+  margin-right: 10px;
+  animation: bounce 1.5s infinite; /* Add bounce animation */
+}
+
+.col:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.humidity, .wind {
+  font-size: 24px;
+  margin-top: -5px;
+  animation: fadeIn 1s forwards; /* Add fadeIn animation */
+  color: #ffffff; /* White color */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.weather {
+  display: none;
+}
+
+.error {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+  color: #ef4444; /* Red text for error */
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.weather {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.weather.hide {
+  animation: fadeOut 0.5s forwards;
+}
+
+.weather.show {
+  animation: fadeIn 0.5s forwards;
+}
+
+.city, .temp, .humidity, .wind {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hide-city, .hide-temp, .hide-humidity, .hide-wind {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.show-city, .show-temp, .show-humidity, .show-wind {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.weathericon {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hide-icon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.show-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Add pulse animation to weather icon */
+.weathericon {
+  animation: pulse 2s infinite; /* Add pulse animation */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Add fade-in animation to temperature and city name */
+.weather h1 {
+  animation: fadeIn 1s forwards; /* Add fadeIn animation */
+}
+
+.weather h2 {
+  animation: fadeIn 1s forwards; /* Add fadeIn animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add bounce animation to humidity and wind speed icons */
+.col img {
+  animation: bounce 1.5s infinite; /* Add bounce animation */
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.suggestions {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e3a8a;
+  width: calc(100% - 50px);
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  margin-top: 10px;
+}
+
+.suggestions p {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.suggestions p:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
